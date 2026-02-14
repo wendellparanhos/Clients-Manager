@@ -1,0 +1,146 @@
+<div class="form-container">
+  
+  <!-- Form Card -->
+  <section class="form-section">
+    <div class="form-header">
+      <div class="header-content">
+        <h2>{{ isEditMode ? 'Editar Cliente' : 'Novo Cliente' }}</h2>
+        <p class="subtitle">{{ isEditMode ? 'Atualize as informações do cliente' : 'Preencha os dados do novo cliente' }}</p>
+      </div>
+    </div>
+
+    <form [formGroup]="clientForm" (ngSubmit)="onSubmit()">
+      
+      <!-- Personal Information Section -->
+      <div class="section-divider">
+        <h3>Informações Pessoais</h3>
+      </div>
+
+      <div class="form-grid">
+        <!-- Name -->
+        <div class="form-group full-width">
+          <label for="name">Nome Completo</label>
+          <input 
+            type="text" 
+            id="name" 
+            formControlName="name"
+            placeholder="João Silva"
+            [class.error]="isFieldInvalid('name')"
+          >
+          @if (isFieldInvalid('name')) {
+            <span class="error-message">Nome é obrigatório.</span>
+          }
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input 
+            type="email" 
+            id="email" 
+            formControlName="email"
+            placeholder="joao@exemplo.com"
+            [class.error]="isFieldInvalid('email')"
+          >
+          @if (isFieldInvalid('email')) {
+            <span class="error-message">Email válido é obrigatório.</span>
+          }
+        </div>
+
+        <!-- Phone -->
+        <div class="form-group">
+          <label for="phone">Telefone</label>
+          <input 
+            type="text" 
+            id="phone" 
+            formControlName="phone"
+            placeholder="(11) 90000-0000"
+            (input)="applyMask($event, 'phone')"
+            [class.error]="isFieldInvalid('phone')"
+          >
+          @if (isFieldInvalid('phone')) {
+            <span class="error-message">Telefone é obrigatório.</span>
+          }
+        </div>
+
+        <!-- CPF -->
+        <div class="form-group">
+          <label for="cpf">CPF</label>
+          <input 
+            type="text" 
+            id="cpf" 
+            formControlName="cpf"
+            placeholder="000.000.000-00"
+            (input)="applyMask($event, 'cpf')"
+            [class.error]="isFieldInvalid('cpf')"
+          >
+          @if (isFieldInvalid('cpf')) {
+            <span class="error-message">CPF é obrigatório.</span>
+          }
+        </div>
+
+        <!-- Birth Date -->
+        <div class="form-group">
+          <label for="birthDate">Data de Nascimento</label>
+          <input 
+            type="date" 
+            id="birthDate" 
+            formControlName="birthDate"
+            [class.error]="isFieldInvalid('birthDate')"
+          >
+          @if (isFieldInvalid('birthDate')) {
+            <span class="error-message">Data de nascimento é obrigatória.</span>
+          }
+        </div>
+
+        <!-- Address -->
+        <div class="form-group full-width">
+          <label for="address">Endereço</label>
+          <input 
+            type="text" 
+            id="address" 
+            formControlName="address"
+            placeholder="Rua Exemplo, 123 - Cidade, Estado"
+            [class.error]="isFieldInvalid('address')"
+          >
+          @if (isFieldInvalid('address')) {
+            <span class="error-message">Endereço é obrigatório.</span>
+          }
+        </div>
+
+        <!-- Status -->
+        <div class="form-group">
+          <label for="status">Status</label>
+          <select 
+            id="status" 
+            formControlName="status"
+          >
+            <option value="active">Ativo</option>
+            <option value="inactive">Inativo</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Form Actions -->
+      <div class="form-actions">
+        <button type="button" class="btn-cancel" routerLink="/clients">
+          <span class="material-icons">Cancelar</span>
+        </button>
+        <button 
+          type="submit" 
+          class="btn-submit"
+          [disabled]="clientForm.invalid || isLoading"
+        >
+          @if (isLoading) {
+            <span class="loading-spinner"></span>
+            <span>Salvando...</span>
+          } @else {
+            <span class="material-icons">{{ isEditMode ? 'Atualizar Cliente' : 'Criar Cliente' }}</span>
+          }
+        </button>
+      </div>
+
+    </form>
+  </section>
+
+</div>

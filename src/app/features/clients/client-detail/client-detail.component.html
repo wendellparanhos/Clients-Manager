@@ -1,0 +1,62 @@
+<div class="max-w-3xl mx-auto fade-in py-6" *ngIf="clientSig() as client">
+  <div class="card space-y-8 border-0 shadow-lg relative overflow-hidden">
+    
+    <!-- Header with Actions -->
+    <div class="flex justify-between items-start border-b pb-6">
+        <div>
+             <h2 class="text-2xl font-bold text-gray-900">{{ client.name }}</h2>
+             <p class="text-gray-500">{{ client.email }}</p>
+        </div>
+        <div class="flex gap-3">
+            <a routerLink="/clients" class="btn btn-outline">Back</a>
+            <a [routerLink]="['/clients/edit', client.id]" class="btn btn-primary">Edit</a>
+            <button (click)="deleteClient()" class="btn btn-danger">Delete</button>
+        </div>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Details -->
+        <div>
+            <label class="text-sm font-medium text-gray-500">Full Name</label>
+            <p class="text-lg font-medium text-gray-900">{{ client.name }}</p>
+        </div>
+
+        <div>
+            <label class="text-sm font-medium text-gray-500">Email</label>
+            <p class="text-lg text-gray-900">{{ client.email }}</p>
+        </div>
+
+        <div>
+            <label class="text-sm font-medium text-gray-500">Phone</label>
+            <p class="text-lg text-gray-900">{{ client.phone }}</p>
+        </div>
+
+        <div>
+            <label class="text-sm font-medium text-gray-500">CPF</label>
+            <p class="text-lg text-gray-900">{{ client.cpf }}</p>
+        </div>
+
+        <div>
+            <label class="text-sm font-medium text-gray-500">Birth Date</label>
+            <p class="text-lg text-gray-900">{{ client.birthDate | date:'mediumDate' }}</p>
+        </div>
+
+        <div>
+            <label class="text-sm font-medium text-gray-500">Status</label>
+            <p>
+                <span class="px-2 py-1 rounded-full text-xs font-semibold"
+                  [class.bg-green-100]="client.status === 'active'"
+                  [class.text-green-800]="client.status === 'active'"
+                  [class.bg-gray-100]="client.status === 'inactive'"
+                  [class.text-gray-800]="client.status === 'inactive'">
+                  {{ client.status | titlecase }}
+                </span>
+            </p>
+        </div>
+
+        <div class="col-span-2">
+            <label class="text-sm font-medium text-gray-500">Address</label>
+            <p class="text-lg text-gray-900">{{ client.address }}</p>
+        </div>
+    </div>
+  </div>
+</div>

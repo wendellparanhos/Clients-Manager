@@ -1,0 +1,61 @@
+<div class="login-container">
+  <div class="login-card">
+    <!-- Logo/Header -->
+    <div class="login-header">
+      <div class="logo-icon">
+        <span class="material-icons">lock_person</span>
+      </div>
+      <h1>Bem-vindo de Volta</h1>
+      <p>Entre para continuar no ClientMgr</p>
+    </div>
+
+    <!-- Form -->
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+      
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input 
+          id="email" 
+          type="email" 
+          formControlName="email" 
+          autocomplete="email"
+        >
+        <span class="error-message" *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+          Email válido é obrigatório
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Senha</label>
+        <input 
+          id="password" 
+          type="password" 
+          formControlName="password" 
+          autocomplete="current-password"
+        >
+        <span class="error-message" *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+          Senha é obrigatória
+        </span>
+      </div>
+
+      <!-- Error Message -->
+      <div *ngIf="errorMessage" class="error-alert">
+        <span class="material-icons">error_outline</span>
+        <span>{{ errorMessage }}</span>
+      </div>
+
+      <button type="submit" class="btn-login" [disabled]="loginForm.invalid">
+        <span *ngIf="!isLoading">Entrar</span>
+        <span *ngIf="isLoading" class="loading-spinner"></span>
+      </button>
+
+      <div class="divider">
+        <span>ou</span>
+      </div>
+
+      <p class="link-register">
+        Não tem uma conta? <a routerLink="/register"><strong>Cadastre-se</strong></a>
+      </p>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,159 @@
+<div class="clients-container">
+  
+  <!-- Stats Cards -->
+  <section class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-icon total">
+        <span class="material-icons">Grupo</span>
+      </div>
+      <div class="stat-content">
+        <p class="stat-label">Total de Clientes</p>
+        <h3 class="stat-value">{{ totalClients() }}</h3>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon active">
+        <span class="material-icons">Usuário Ativo</span>
+      </div>
+      <div class="stat-content">
+        <p class="stat-label">Ativos</p>
+        <h3 class="stat-value">{{ activeClients() }}</h3>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon inactive">
+        <span class="material-icons">Usuário Inativo</span>
+      </div>
+      <div class="stat-content">
+        <p class="stat-label">Inativos</p>
+        <h3 class="stat-value">{{ inactiveClients() }}</h3>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon new">
+        <span class="material-icons">Usuário Pendente</span>
+      </div>
+      <div class="stat-content">
+        <p class="stat-label">Este Mês</p>
+        <h3 class="stat-value">+{{ newClientsMonth() }}</h3>
+      </div>
+    </div>
+  </section>
+
+  <!-- Clients Table -->
+  <section class="table-section">
+    <div class="section-header">
+      <div class="header-content">
+        <h2>Todos os Clientes</h2>
+        <p class="subtitle">Gerencie seus clientes e suas informações</p>
+      </div>
+      <button class="add-btn" routerLink="/clients/new">
+        <span class="material-icons">Adicionar Cliente</span>
+      </button>
+    </div>
+
+    <!-- Filters -->
+    <div class="filters-bar">
+      <div class="search-box">
+        <span class="material-icons" *ngIf="!searchControl.value">Pesquisar</span>
+        <input 
+          type="text" 
+          [formControl]="searchControl"
+        >
+      </div>
+      <select class="filter-select" [formControl]="statusFilterControl">
+        <option value="all">Todos os Status</option>
+        <option value="active">Apenas Ativos</option>
+        <option value="inactive">Apenas Inativos</option>
+        <option value="pending">Pendentes</option>
+      </select>
+    </div>
+
+    <!-- Table -->
+    <div class="table-container">
+      <table class="clients-table">
+        <thead>
+          <tr>
+            <th>Cliente</th>
+            <th>Contato</th>
+            <th>Status</th>
+            <th>Cadastrado</th>
+            <th class="text-right">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (client of filteredClients(); track client.id) {
+            <tr>
+              <td>
+                <div class="client-name">
+                  <div class="client-avatar">
+                    {{ client.name.charAt(0).toUpperCase() }}
+                  </div>
+                  <div>
+                    <span class="name">{{ client.name }}</span>
+                    <span class="id">ID: {{ client.id ? client.id.substring(client.id.length - 6) : 'N/A' }}</span>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="contact-info">
+                  <span class="email">{{ client.email }}</span>
+                  <span class="phone">{{ client.phone }}</span>
+                </div>
+              </td>
+              <td>
+                <span class="status-badge" 
+                  [class.status-active]="client.status === 'active'" 
+                  [class.status-inactive]="client.status === 'inactive'"
+                  [class.status-pending]="client.status === 'pending'">
+                  {{ client.status === 'active' ? 'Ativo' : client.status === 'inactive' ? 'Inativo' : 'Pendente' }}
+                </span>
+              </td>
+              <td class="date-cell">
+                {{ client.createdAt | date: 'dd/MM/y' }}
+              </td>
+              <td class="text-right">
+                <div class="action-buttons">
+                  <a [routerLink]="['/clients/edit', client.id]" class="action-link" title="Editar">
+                    <span class="material-icons">Editar</span>
+                  </a>
+                  <button (click)="deleteClient(client)" class="action-link delete" title="Excluir">
+                    <span class="material-icons">Excluir</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="5" class="empty-state">
+                <div class="empty-content">
+                  <span class="material-icons">Caixa</span>
+                  <p>Nenhum cliente encontrado. <a routerLink="/clients/new">Adicione o primeiro</a></p>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Table Footer -->
+    <div class="table-footer">
+      <div class="footer-info">
+        <span class="footer-text">Mostrando {{ filteredClients().length }} de {{ totalClients() }} clientes</span>
+      </div>
+      <div class="footer-actions">
+        <button class="footer-btn">
+          <span class="material-icons">Exportar</span>
+        </button>
+        <button class="footer-btn primary" routerLink="/clients/new">
+          <span class="material-icons">Adicionar Cliente</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+</div>

@@ -1,0 +1,58 @@
+<div class="app-container">
+  
+  <!-- Mobile Overlay -->
+  <div *ngIf="isSidebarOpen" (click)="toggleSidebar()" class="mobile-overlay"></div>
+
+  <!-- Vertical Header (Sidebar) -->
+  <header class="vertical-header" [class.open]="isSidebarOpen">
+    
+    <!-- Logo -->
+    <div class="header-logo">
+      <div class="logo-icon">
+        <span class="material-icons">dataset</span>
+      </div>
+      <span class="logo-text">ClientMgr</span>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="header-nav">
+      <ul>
+        <li>
+          <a routerLink="/dashboard" routerLinkActive="active">
+            <span class="material-icons">Painel</span>
+          </a>
+        </li>
+        <li>
+          <a routerLink="/clients" routerLinkActive="active">
+            <span class="material-icons">Clientes</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    
+    <!-- User Section -->
+    <div class="header-user">
+      <div class="user-avatar">
+        <span>{{ userEmail().charAt(0).toUpperCase() }}</span>
+      </div>
+      <div class="user-info">
+        <p class="user-email">{{ userEmail() }}</p>
+        <p class="user-role">Admin</p>
+      </div>
+      <button (click)="logout()" class="logout-btn" title="Sair">
+        <span class="material-icons">Sair</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Mobile Menu Toggle -->
+    <button (click)="toggleSidebar()" class="mobile-menu-btn">
+      <span class="material-icons">menu</span>
+    </button>
+
+    <router-outlet></router-outlet>
+  </main>
+
+</div>
