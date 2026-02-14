@@ -1,21 +1,73 @@
-Este projeto foi gerado com Angular CLI versão 17.3.17.
+# Clients-Manager 🚀
 
-Servidor de desenvolvimento
-Execute ng serve para iniciar um servidor de desenvolvimento. Navegue até http://localhost:4200/. A aplicação será recarregada automaticamente se você modificar qualquer um dos arquivos fonte.
+Um gerenciador de clientes moderno e intuitivo construído com **Angular 17** e **Firebase**. Esta aplicação permite o controle completo de uma base de clientes, com uma interface focada na experiência do usuário e alta performance.
 
-Geração de código
-Execute ng generate component nome-do-componente para gerar um novo componente. Você também pode usar ng generate directive|pipe|service|class|guard|interface|enum|module.
+## ✨ Funcionalidades
 
-Build
-Execute ng build para compilar o projeto. Os arquivos compilados serão armazenados no diretório dist/.
-Executando testes unitários
+- 🔐 **Autenticação Segura**: Fluxos de login e cadastro integrados com Firebase Authentication.
+- 📊 **Dashboard Estratégico**: Visualização rápida do total de clientes e métricas importantes.
+- 👥 **Gestão de Clientes (CRUD)**:
+  - Listagem com busca e filtros.
+  - Cadastro de novos clientes.
+  - Edição de informações existentes.
+  - Exclusão segura.
+- 🔔 **Feedback Interativo**: Sistema de notificações (toasts) criativo para todas as ações do usuário.
+- 📱 **Design Responsivo**: Interface que se adapta perfeitamente a dispositivos móveis e desktops.
+- 🎨 **Estética Premium**: Uso de gradientes, micro-animações e um sistema de design moderno.
 
-Execute ng test para executar os testes unitários via Karma.
+## 🛠️ Tecnologias Utilizadas
 
-Executando testes end-to-end
+- **Core**: [Angular 17](https://angular.io/) (Standalone Components, Signals).
+- **Backend/Service**: [Firebase](https://firebase.google.com/) (Firestore, Auth).
+- **Estilo**: Vanilla CSS com variáveis para um design escalável e customizável.
+- **Ícones**: Lucide Icons / Font Awesome.
 
-Execute ng e2e para executar os testes end-to-end através de uma plataforma de sua escolha. Para usar este comando, você precisa primeiro adicionar um pacote que implemente capacidades de testes end-to-end.
+## 🚀 Como Executar o Projeto
 
-Ajuda adicional
+### Pré-requisitos
 
-Para obter mais ajuda sobre o Angular CLI, use ng help ou consulte a página Visão Geral e Referência de Comandos do Angular CLI.
+Certifique-se de ter o [Node.js](https://nodejs.org/) (v18+) e o [Angular CLI](https://angular.io/cli) instalados em sua máquina.
+
+### Instalação
+
+1. Clone o repositório:
+
+   ```bash
+   git clone https://github.com/seu-usuario/clients-manager.git
+   ```
+
+2. Entre no diretório do projeto:
+
+   ```bash
+   cd clients-manager
+   ```
+
+3. Instale as dependências:
+   ```bash
+   npm install
+   ```
+
+### Execução
+
+Para iniciar o servidor de desenvolvimento, execute:
+
+```bash
+npm start
+```
+
+A aplicação estará disponível em `http://localhost:4200/`.
+
+## 📁 Estrutura do Projeto
+
+```text
+src/
+├── app/
+│   ├── core/      # Componentes globais, guards e serviços base
+│   ├── features/  # Módulos de funcionalidades (Dashboard, Clientes, Auth)
+│   ├── shared/    # Componentes e pipes reutilizáveis
+│   └── app.routes.ts # Definição centralizada de rotas
+├── assets/        # Imagens e arquivos estáticos
+└── index.html     # Ponto de entrada HTML
+```
+
+---
